@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintBottom_toTopOf="@id/divideScreenGuideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/dark_blue"
+        android:padding="@dimen/defaultLayoutSpace">
+
+        <ImageButton
+            android:id="@+id/arrow_back_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_constraintBottom_toBottomOf="@id/profile_text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/profile_text_view"
+            android:layout_width="@dimen/arrow_back_size"
+            android:layout_height="@dimen/arrow_back_size"
+            android:src="@drawable/arrow_back_24px" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/profile_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            android:textSize="@dimen/settingsTextSize" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_text_view"
+            android:layout_width="@dimen/profileImageSize"
+            android:layout_height="@dimen/profileImageSize"
+            android:layout_marginTop="@dimen/profile_icon_margin_top"
+            android:src="@drawable/default_contact_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/name_view_margin_top"
+            android:text="@string/full_name"
+            android:textSize="@dimen/nameTextSize" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/career_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/career_margin_top"
+            android:text="@string/career"
+            android:textSize="@dimen/careerTextSize" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/home_address_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/career_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_address_margin_top"
+            android:text="@string/home_address"
+            android:textSize="@dimen/homeAddressTextSize" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/divideScreenGuideLine"
+        app:layout_constraintGuide_percent="0.50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divideScreenGuideLine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/defaultLayoutSpace">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/message_contacts_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/view_my_contacts_shape"
+            android:text="@string/message"
+            android:textSize="@dimen/view_my_contacts_text_size" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

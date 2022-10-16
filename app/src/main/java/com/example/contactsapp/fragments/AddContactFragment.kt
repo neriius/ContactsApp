@@ -1,7 +1,6 @@
 package com.example.contactsapp.fragments
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -18,7 +17,6 @@ import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentAddContactBinding
 import com.example.contactsapp.viewModels.ContactsViewModel
-import java.net.URI
 
 
 class AddContactFragment : Fragment() {

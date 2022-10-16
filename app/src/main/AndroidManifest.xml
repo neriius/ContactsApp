@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ContactsApp"
         tools:targetApi="31" >
         <activity
-            android:name="activities.SignUpActivity"
+            android:name=".activities.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
                 android:value="" />
         </activity>
 
-       <activity android:name="activities.FragmentsActivity" />
+       <activity android:name=".activities.FragmentsActivity" />
     </application>
 
 </manifest>
