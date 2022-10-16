@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="defaultHintSize">14sp</dimen>
+    <dimen name="defaultTextSize">16sp</dimen>
+    <dimen name="edit_text_children_space_top">24dp</dimen>
+</resources>

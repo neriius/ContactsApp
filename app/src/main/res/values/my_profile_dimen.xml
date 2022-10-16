@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings dimen -->
+    <dimen name="settingsTextSize">24sp</dimen>
+    <dimen name="nameTextSize">18sp</dimen>
+    <dimen name="careerTextSize">14sp</dimen>
+    <dimen name="homeAddressTextSize">14sp</dimen>
+    <dimen name="profile_icon_margin_top">24dp</dimen>
+    <dimen name="name_view_margin_top">24dp</dimen>
+    <dimen name="career_margin_top">8dp</dimen>
+    <dimen name="home_address_margin_top">16dp</dimen>
+    <dimen name="view_my_contacts_text_size">16sp</dimen>
+    <dimen name="edit_profile_text_size">14sp</dimen>
+</resources>
