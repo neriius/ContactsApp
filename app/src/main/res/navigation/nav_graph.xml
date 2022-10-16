@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_contactsFragment_to_addContactFragment"
             app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_contactProfileFragment"
+            app:destination="@id/contactProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addContactFragment"
@@ -44,5 +47,16 @@
         <action
             android:id="@+id/action_addContactFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactProfileFragment"
+        android:name="com.example.contactsapp.fragments.ContactProfileFragment"
+        android:label="ContactProfileFragment" >
+        <action
+            android:id="@+id/action_contactProfileFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+        <argument
+            android:name="contact"
+            app:argType="com.example.contactsapp.data.ContactData" />
     </fragment>
 </navigation>

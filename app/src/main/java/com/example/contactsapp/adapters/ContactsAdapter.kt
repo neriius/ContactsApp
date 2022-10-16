@@ -2,9 +2,13 @@ package com.example.contactsapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.contactsapp.Constants
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.ContactItemViewBinding
@@ -24,7 +28,10 @@ class ContactsAdapter(private var contacts: ArrayList<ContactData>?) :
         holder.binding.trashImageBtn.setOnClickListener(){
             contacts!!.removeAt(holder.adapterPosition )
             notifyItemRemoved(holder.adapterPosition )
-            println("Adapter" + holder.adapterPosition)
+        }
+        holder.binding.contactIcon.setOnClickListener(){
+            val bundle = bundleOf(Constants.CONTACT_BUNDLE_KEY to contact)
+            holder.itemView.findNavController().navigate(R.id.action_contactsFragment_to_contactProfileFragment, bundle)
         }
         holder.bind(contact)
     }

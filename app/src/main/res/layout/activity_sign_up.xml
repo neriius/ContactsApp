@@ -93,11 +93,11 @@
         app:layout_constraintTop_toTopOf="@id/remember_me_check_box" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle_corners_bg"
+        android:background="@drawable/login_btn_bg"
         android:text="@string/login"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/sign_up_and_account_layout"
