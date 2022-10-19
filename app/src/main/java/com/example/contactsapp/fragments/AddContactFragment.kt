@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.example.contactsapp.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentAddContactBinding
@@ -48,10 +49,21 @@ class AddContactFragment : Fragment() {
             loadImageFromGallery()
         }
 
-        binding.saveBtn.setOnClickListener() {
-            contactsViewModel.addContact(createContact())
-            view.findNavController().navigate(R.id.action_addContactFragment_to_contactsFragment)
+        if (Options.FEATURE_NAVIGATION_ENABLED){
+            binding.saveBtn.setOnClickListener() {
+                contactsViewModel.addContact(createContact())
+                view.findNavController().navigate(R.id.action_addContactFragment_to_contactsFragment)
+            }
+        }else{
+            binding.saveBtn.setOnClickListener {
+                contactsViewModel.addContact(createContact())
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragments_container,ContactsFragment())
+                    .commit()
+            }
         }
+
     }
 
     private fun createContact() = ContactData(

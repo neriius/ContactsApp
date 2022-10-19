@@ -9,17 +9,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contactsapp.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.adapters.ContactsAdapter
+
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentContactsBinding
 import com.example.contactsapp.viewModels.ContactsViewModel
 
-class ContactsFragment:Fragment() {
+class ContactsFragment:Fragment()  {
 
-    private lateinit var binding:FragmentContactsBinding
+    private lateinit var binding: FragmentContactsBinding
     private lateinit var adapter: ContactsAdapter
-    private val contactsViewModel:ContactsViewModel by activityViewModels()
+    private val contactsViewModel: ContactsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,21 +35,41 @@ class ContactsFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.arrowBackBtn.setOnClickListener(){
-            view.findNavController().navigate(R.id.action_contactsFragment_to_myProfileFragment)
+
+        if (Options.FEATURE_NAVIGATION_ENABLED) {
+            binding.arrowBackBtn.setOnClickListener() {
+                view.findNavController().navigate(R.id.action_contactsFragment_to_myProfileFragment)
+            }
+
+            binding.addContactBtn.setOnClickListener() {
+                view.findNavController()
+                    .navigate(R.id.action_contactsFragment_to_addContactFragment)
+            }
+
+        } else {
+            binding.arrowBackBtn.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragments_container, MyProfileFragment())
+                    .commit()
+            }
+
+            binding.addContactBtn.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragments_container, AddContactFragment())
+                    .commit()
+            }
         }
 
-        binding.addContactBtn.setOnClickListener(){
-            view.findNavController().navigate(R.id.action_contactsFragment_to_addContactFragment)
-        }
 
         createContactsRecycleView()
     }
 
-    private fun createContactsRecycleView(){
+    private fun createContactsRecycleView() {
         val contactsList = contactsViewModel.getContacts()
 
-        adapter = ContactsAdapter(contactsList.value as ArrayList<ContactData>?)
+        adapter = ContactsAdapter(contactsList.value as ArrayList<ContactData>?,this)
         val layoutManager = LinearLayoutManager(context)
         binding.contactsRecycleView.adapter = adapter
         binding.contactsRecycleView.layoutManager = layoutManager
@@ -56,4 +78,5 @@ class ContactsFragment:Fragment() {
             adapter.setContacts(it as ArrayList<ContactData>)
         })
     }
+
 }

@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.contactsapp.Constants
+import com.example.contactsapp.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
-import com.example.contactsapp.databinding.ActivityFragmentsBinding
 import com.example.contactsapp.databinding.FragmentContactProfileBinding
 
 class ContactProfileFragment() : Fragment() {
@@ -36,9 +38,19 @@ class ContactProfileFragment() : Fragment() {
             careerTextView.text = contact.contactCareer
         }
 
-        binding.arrowBackBtn.setOnClickListener(){
-            view.findNavController().navigate(R.id.action_contactProfileFragment_to_contactsFragment)
+        binding.arrowBackBtn.setOnClickListener() {
+            if (Options.FEATURE_NAVIGATION_ENABLED) {
+
+                view.findNavController().navigate(R.id.action_contactProfileFragment_to_contactsFragment)
+            } else {
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragments_container, ContactsFragment())
+                    .commit()
+            }
         }
+
+
     }
 
     private fun loadImageToContactProfile(contact: ContactData) {
