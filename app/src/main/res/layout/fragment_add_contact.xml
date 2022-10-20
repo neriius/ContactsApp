@@ -56,6 +56,7 @@
         android:paddingEnd="@dimen/defaultLayoutSpace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/save_btn"
         app:layout_constraintTop_toBottomOf="@id/divideScreenGuideLine">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -120,9 +121,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/edit_text_children_space_top"
-            android:hint="@string/adress">
+            android:hint="@string/address">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="postalAddress"
@@ -142,7 +144,6 @@
         android:text="@string/save"
         android:textSize="@dimen/view_my_contacts_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contact_data_fields_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

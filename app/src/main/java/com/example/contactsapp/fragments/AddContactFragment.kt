@@ -11,9 +11,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.contactsapp.Options
+import com.example.contactsapp.interfaces.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentAddContactBinding
@@ -25,7 +25,7 @@ class AddContactFragment : Fragment() {
     private lateinit var binding: FragmentAddContactBinding
     private val contactsViewModel: ContactsViewModel by activityViewModels()
     private var imageURI: String
-    private lateinit var openGalleryActivity : ActivityResultLauncher<Intent>
+    private lateinit var openGalleryActivity: ActivityResultLauncher<Intent>
 
     init {
         imageURI = ""
@@ -49,18 +49,15 @@ class AddContactFragment : Fragment() {
             loadImageFromGallery()
         }
 
-        if (Options.FEATURE_NAVIGATION_ENABLED){
+        if (Options.FEATURE_NAVIGATION_ENABLED) {
             binding.saveBtn.setOnClickListener() {
                 contactsViewModel.addContact(createContact())
-                view.findNavController().navigate(R.id.action_addContactFragment_to_contactsFragment)
+                navigateToFragment(R.id.action_addContactFragment_to_contactsFragment)
             }
-        }else{
+        } else {
             binding.saveBtn.setOnClickListener {
                 contactsViewModel.addContact(createContact())
-                parentFragmentManager.beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragments_container,ContactsFragment())
-                    .commit()
+                transactToFragment(ContactsFragment())
             }
         }
 
@@ -69,7 +66,8 @@ class AddContactFragment : Fragment() {
     private fun createContact() = ContactData(
         imageURI,
         binding.usernameTextInput.text.toString(),
-        binding.careerTextInput.text.toString()
+        binding.careerTextInput.text.toString(),
+        binding.addressTextInput.text.toString()
     )
 
     private fun loadImageFromGallery() {
@@ -77,6 +75,24 @@ class AddContactFragment : Fragment() {
         openGalleryActivity.launch(intent)
     }
 
+    /**
+     * Navigate from this fragment to another
+     * @param navigationAction action id to navigate
+     */
+    private fun navigateToFragment(navigationAction: Int) {
+        findNavController().navigate(navigationAction)
+    }
+
+    /**
+     * Make transact from this fragment to another
+     * @param fragment to transact to
+     */
+    private fun transactToFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragments_container, fragment)
+            .commit()
+    }
 
     /**
      * Returns ActivityResultLauncher<Intent>  that opens the gallery and returns uri of the image

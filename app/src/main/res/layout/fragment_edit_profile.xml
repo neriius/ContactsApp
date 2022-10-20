@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -63,6 +64,7 @@
             android:hint="@string/username">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="username"
@@ -77,6 +79,7 @@
             android:hint="@string/career">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_career"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
@@ -91,6 +94,7 @@
             android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="emailAddress"
@@ -105,6 +109,7 @@
             android:hint="@string/phone">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/edit_text_children_space_top"
@@ -117,9 +122,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/edit_text_children_space_top"
-            android:hint="@string/adress">
+            android:hint="@string/address">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="postalAddress"
