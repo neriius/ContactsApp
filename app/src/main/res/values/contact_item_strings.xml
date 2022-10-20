@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="contact_name">Contact name</string>
+    <dimen name="space_between_contacts_bottom">16dp</dimen>
 </resources>

@@ -14,11 +14,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ContactsApp"
         tools:targetApi="31" >
         <activity
             android:name=".activities.SignUpActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.RegisterActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,7 +29,8 @@
                 android:value="" />
         </activity>
 
-       <activity android:name=".activities.FragmentsActivity" />
+       <activity android:name=".activities.FragmentsActivity"
+           android:theme="@style/Theme.FragmentsActivityTheme"/>
     </application>
 
 </manifest>
