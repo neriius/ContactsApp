@@ -4,17 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.contactsapp.interfaces.Constants
 import com.example.contactsapp.interfaces.OnContactIconClicked
-import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.ContactItemViewBinding
-import com.example.contactsapp.fragments.ContactsFragment
+import com.example.contactsapp.fragments.ContactsBookFragment
+import com.example.contactsapp.objects.ImageLoader
 
 class ContactsAdapter(
     private var contacts: ArrayList<ContactData>?,
-    private val contactsFragment: ContactsFragment,
+    private val contactsBookFragment: ContactsBookFragment,
     private val onContactIconClickedListener: OnContactIconClicked
 ) :
     RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
@@ -31,8 +30,8 @@ class ContactsAdapter(
             try {
                 contacts!!.removeAt(holder.adapterPosition)
                 notifyItemRemoved(holder.adapterPosition)
-            }catch (e:ArrayIndexOutOfBoundsException){
-                
+            } catch (e: ArrayIndexOutOfBoundsException) {
+
             }
 
         }
@@ -47,8 +46,7 @@ class ContactsAdapter(
         contacts = list
     }
 
-    class ContactsViewHolder(val binding: ContactItemViewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ContactsViewHolder(val binding: ContactItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
         /**
          * Initialize contact view with contact data
          */
@@ -61,11 +59,9 @@ class ContactsAdapter(
                     val bundle = bundleOf(Constants.CONTACT_BUNDLE_KEY to contact)
                     onContactIconClickedListener.sendContactBundle(bundle, itemView);
                 }
-                Glide.with(itemView)
-                    .load(contact.contactIconUrl)
-                    .error(R.drawable.default_contact_icon)
-                    .circleCrop()
-                    .into(binding.contactIcon)
+
+                ImageLoader.loadImageInView(contact.contactIconUrl, binding.contactIcon, itemView)
+
             }
         }
 

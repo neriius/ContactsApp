@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/myProfileFragment">
+    app:startDestination="@id/viewPagerFragment">
 
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.contactsapp.fragments.MyProfileFragment"
-        android:label="MyProfileFragment" >
+        android:label="MyProfileFragment">
         <action
             android:id="@+id/action_myProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.contactsapp.fragments.EditProfileFragment"
-        android:label="EditProfileFragment" >
+        android:label="EditProfileFragment">
         <action
             android:id="@+id/action_editProfileFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/contactsFragment"
-        android:name="com.example.contactsapp.fragments.ContactsFragment"
+        android:name="com.example.contactsapp.fragments.ContactsBookFragment"
         android:label="ContactsFragment">
 
         <action
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/addContactFragment"
         android:name="com.example.contactsapp.fragments.AddContactFragment"
-        android:label="AddContactFragment" >
+        android:label="AddContactFragment">
         <action
             android:id="@+id/action_addContactFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/contactProfileFragment"
         android:name="com.example.contactsapp.fragments.ContactProfileFragment"
-        android:label="ContactProfileFragment" >
+        android:label="ContactProfileFragment">
         <action
             android:id="@+id/action_contactProfileFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
@@ -59,4 +59,13 @@
             android:name="contact"
             app:argType="com.example.contactsapp.data.ContactData" />
     </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.contactsapp.fragments.ViewPagerFragment"
+        android:label="ViewPagerFragment" >
+        <action
+            android:id="@+id/action_viewPagerFragment2_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
+    </fragment>
+
 </navigation>

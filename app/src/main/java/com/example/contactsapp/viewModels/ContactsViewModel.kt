@@ -14,11 +14,12 @@ class ContactsViewModel : ViewModel() {
         _contactsMutableLiveData.value = ArrayList()
     }
 
-     fun addContact(contact: ContactData){
+
+    fun addContact(contact: ContactData) {
         _contactsMutableLiveData.value = _contactsMutableLiveData.value?.plus(contact);
     }
 
-     fun getContacts() : LiveData<List<ContactData>> {
+    fun getContacts(): LiveData<List<ContactData>> {
         return contactsLiveData
     }
 }

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.contactsapp.interfaces.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentAddContactBinding
@@ -35,7 +34,7 @@ class AddContactFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddContactBinding.inflate(inflater, container, false)
         openGalleryActivity = getOpenGalleryIntent()
         return binding.root
@@ -49,16 +48,9 @@ class AddContactFragment : Fragment() {
             loadImageFromGallery()
         }
 
-        if (Options.FEATURE_NAVIGATION_ENABLED) {
-            binding.saveBtn.setOnClickListener() {
-                contactsViewModel.addContact(createContact())
-                navigateToFragment(R.id.action_addContactFragment_to_contactsFragment)
-            }
-        } else {
-            binding.saveBtn.setOnClickListener {
-                contactsViewModel.addContact(createContact())
-                transactToFragment(ContactsFragment())
-            }
+        binding.saveBtn.setOnClickListener() {
+            contactsViewModel.addContact(createContact())
+            navigateToFragment(R.id.action_addContactFragment_to_contactsFragment)
         }
 
     }
@@ -81,17 +73,6 @@ class AddContactFragment : Fragment() {
      */
     private fun navigateToFragment(navigationAction: Int) {
         findNavController().navigate(navigationAction)
-    }
-
-    /**
-     * Make transact from this fragment to another
-     * @param fragment to transact to
-     */
-    private fun transactToFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragments_container, fragment)
-            .commit()
     }
 
     /**

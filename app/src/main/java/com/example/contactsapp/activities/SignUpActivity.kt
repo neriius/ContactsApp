@@ -21,7 +21,7 @@ class SignUpActivity : AppCompatActivity() {
     /**
      * name of struct that will be keep email login and remember me views states
      */
-    private val LOGIN_PREFERENCES:String = "email_password_pref"
+    private val LOGIN_PREFERENCES: String = "email_password_pref"
 
     /**
      * key to get or put email view state from or to preference
@@ -78,13 +78,13 @@ class SignUpActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             if (validEmail() == null && validPassword() == null) {
                 saveLoginDataInPreferences()
-                createProfileActivityIntent()
+                createMyProfileFragmentIntent()
             }
         }
     }
 
-    private fun createProfileActivityIntent() {
-        val intent: Intent = Intent(this, FragmentsActivity::class.java)
+    private fun createMyProfileFragmentIntent() {
+        val intent = Intent(this, FragmentsActivity::class.java)
         intent.putExtra(EMAIL_EXTRA_KEY, binding.emailEditText.text.toString());
         startActivity(intent)
     }

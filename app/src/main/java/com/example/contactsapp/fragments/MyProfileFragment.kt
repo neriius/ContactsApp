@@ -1,17 +1,21 @@
 package com.example.contactsapp.fragments
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.contactsapp.interfaces.Options
 import com.example.contactsapp.R
+import com.example.contactsapp.adapters.FragmentsViewPagerAdapter
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentMyProfileBinding
 import com.example.contactsapp.interfaces.Constants
+import com.example.contactsapp.objects.ImageLoader
+import com.example.contactsapp.objects.Navigator
 
 class MyProfileFragment : Fragment() {
 
@@ -21,31 +25,24 @@ class MyProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (arguments?.containsKey(Constants.CONTACT_BUNDLE_KEY) == true) {
+
+        if(arguments != null){
             fillProfileWithDataFromEditProfileFragment()
         }
 
         binding.editProfileBtn.setOnClickListener() {
-            if (Options.FEATURE_NAVIGATION_ENABLED == true) {
-                navigateToFragment(R.id.action_myProfileFragment_to_editProfileFragment)
-            } else {
-                transactToFragment(EditProfileFragment())
-            }
+            Navigator.navigateToFragment(this,R.id.action_myProfileFragment_to_editProfileFragment)
         }
 
         binding.viewMyContactsBtn.setOnClickListener() {
-            if (Options.FEATURE_NAVIGATION_ENABLED == true) {
-                navigateToFragment(R.id.action_myProfileFragment_to_contactsFragment)
-            } else {
-                transactToFragment(ContactsFragment())
-            }
+            Navigator.navigateToFragment(this, R.id.action_myProfileFragment_to_contactsFragment)
         }
     }
 
@@ -54,30 +51,7 @@ class MyProfileFragment : Fragment() {
         binding.careerTextView.text = contact.contactCareer
         binding.nameTextView.text = contact.contactName
         binding.homeAddressTextView.text = contact.homeAddress
-        Glide.with(this)
-            .load(contact.contactIconUrl)
-            .error(R.drawable.default_contact_icon)
-            .circleCrop()
-            .into(binding.profileImage)
-    }
-
-    /**
-     * Navigate from this fragment to another
-     * @param navigationAction action id to navigate
-     */
-    private fun navigateToFragment(navigationAction: Int) {
-        findNavController().navigate(navigationAction)
-    }
-
-    /**
-     * Make transact from this fragment to another
-     * @param fragment to transact to
-     */
-    private fun transactToFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragments_container, fragment)
-            .commit()
+        ImageLoader.loadImageInView(contact.contactIconUrl, binding.profileImage, this)
     }
 
 }

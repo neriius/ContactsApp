@@ -13,11 +13,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.contactsapp.interfaces.Options
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentEditProfileBinding
 import com.example.contactsapp.interfaces.Constants
+import com.example.contactsapp.objects.ImageLoader
+import com.example.contactsapp.objects.Navigator
 
 class EditProfileFragment() : Fragment() {
 
@@ -29,63 +30,45 @@ class EditProfileFragment() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
-        openGalleryActivity = getOpenGalleryIntent()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        openGalleryActivity = getOpenGalleryIntent()
         binding.profileImage.setOnClickListener() {
             loadImageFromGallery()
         }
 
-
-
-        if (Options.FEATURE_NAVIGATION_ENABLED) {
-            binding.saveBtn.setOnClickListener() {
-                var contact: ContactData
-                with(binding) {
-                    contact = ContactData(
-                        imageURI,
-                        profileUsername.text.toString(),
-                        profileCareer.text.toString(),
-                        profileAddress.text.toString()
-                    )
-                }
-                navigateToFragment(R.id.action_editProfileFragment_to_myProfileFragment, contact)
-            }
-        } else {
-            binding.saveBtn.setOnClickListener() {
-                transactToFragment(MyProfileFragment())
-            }
+        binding.saveBtn.setOnClickListener() {
+            val contact: ContactData = createContactFromFields()
+            val contactBundle = bundleOf(Constants.CONTACT_BUNDLE_KEY to contact)
+            Navigator.navigateAndSendBundleToFragment(
+                this,
+                R.id.action_editProfileFragment_to_myProfileFragment,
+                contactBundle
+            )
         }
 
     }
 
-    /**
-     * Navigate from this fragment to another
-     * @param navigationAction action id to navigate
-     */
-    private fun navigateToFragment(navigationAction: Int, contact: ContactData) {
-        findNavController().navigate(
-            navigationAction,
-            bundleOf(Constants.CONTACT_BUNDLE_KEY to contact)
-        )
+    private fun createContactFromFields(): ContactData{
+        var contact: ContactData
+        with(binding) {
+            contact = ContactData(
+                imageURI,
+                profileUsername.text.toString(),
+                profileCareer.text.toString(),
+                profileAddress.text.toString()
+            )
+        }
+        return contact;
     }
-
     /**
-     * Make transact from this fragment to another
-     * @param fragment to transact to
+     * Get image from gallery
      */
-    private fun transactToFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragments_container, fragment)
-            .commit()
-    }
-
     private fun loadImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         openGalleryActivity.launch(intent)
@@ -101,11 +84,7 @@ class EditProfileFragment() : Fragment() {
                 // There are no request codes
                 val data: Intent? = result.data
                 imageURI = data?.data.toString()
-                Glide.with(this)
-                    .load(imageURI)
-                    .error(R.drawable.default_contact_icon)
-                    .circleCrop()
-                    .into(binding.profileImage)
+                ImageLoader.loadImageInView(imageURI, binding.profileImage, this)
             }
         }
     }
