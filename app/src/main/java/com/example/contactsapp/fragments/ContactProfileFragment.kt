@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.example.contactsapp.interfaces.Constants
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentContactProfileBinding
+import com.example.contactsapp.interfaces.Constants
 import com.example.contactsapp.objects.ImageLoader
+import com.example.contactsapp.objects.Navigator
 
 class ContactProfileFragment() : Fragment() {
 
@@ -39,18 +38,10 @@ class ContactProfileFragment() : Fragment() {
             homeAddressTextView.text = contact.homeAddress
         }
 
-        binding.arrowBackBtn.setOnClickListener() {
-            navigateToFragment(R.id.action_contactProfileFragment_to_contactsFragment)
+
+        binding.arrowBackBtn.setOnClickListener(){
+            Navigator.navigateToFragment(this, R.id.action_contactProfileFragment_to_viewPagerFragment2)
         }
-
-    }
-
-    /**
-     * Navigate from this fragment to another
-     * @param navigationAction action id to navigate
-     */
-    private fun navigateToFragment(navigationAction: Int) {
-        findNavController().navigate(navigationAction)
     }
 
 }

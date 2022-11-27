@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 object Navigator {
-    fun navigateToFragment(fragment: Fragment, navigateAction: Int) {
+    fun navigateToFragment(
+        fragment: Fragment,
+        navigateAction: Int
+    ) {
         fragment.findNavController().navigate(navigateAction)
     }
 

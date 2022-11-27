@@ -5,67 +5,35 @@
     app:startDestination="@id/viewPagerFragment">
 
     <fragment
-        android:id="@+id/myProfileFragment"
-        android:name="com.example.contactsapp.fragments.MyProfileFragment"
-        android:label="MyProfileFragment">
-        <action
-            android:id="@+id/action_myProfileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-        <action
-            android:id="@+id/action_myProfileFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.example.contactsapp.fragments.EditProfileFragment"
-        android:label="EditProfileFragment">
-        <action
-            android:id="@+id/action_editProfileFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/contactsFragment"
-        android:name="com.example.contactsapp.fragments.ContactsBookFragment"
-        android:label="ContactsFragment">
-
-        <action
-            android:id="@+id/action_contactsFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
-        <action
-            android:id="@+id/action_contactsFragment_to_addContactFragment"
-            app:destination="@id/addContactFragment" />
-        <action
-            android:id="@+id/action_contactsFragment_to_contactProfileFragment"
-            app:destination="@id/contactProfileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/addContactFragment"
         android:name="com.example.contactsapp.fragments.AddContactFragment"
         android:label="AddContactFragment">
         <action
-            android:id="@+id/action_addContactFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
+            android:id="@+id/action_addContactFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactProfileFragment"
         android:name="com.example.contactsapp.fragments.ContactProfileFragment"
         android:label="ContactProfileFragment">
-        <action
-            android:id="@+id/action_contactProfileFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
         <argument
             android:name="contact"
             app:argType="com.example.contactsapp.data.ContactData" />
+        <action
+            android:id="@+id/action_contactProfileFragment_to_viewPagerFragment2"
+            app:destination="@id/viewPagerFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="com.example.contactsapp.fragments.ViewPagerFragment"
         android:label="ViewPagerFragment" >
         <action
-            android:id="@+id/action_viewPagerFragment2_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
+            android:id="@+id/action_viewPagerFragment_to_addContactFragment"
+            app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_contactProfileFragment"
+            app:destination="@id/contactProfileFragment" />
     </fragment>
 
 </navigation>

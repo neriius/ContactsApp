@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.contactsapp.R
 import com.example.contactsapp.data.ContactData
 import com.example.contactsapp.databinding.FragmentAddContactBinding
+import com.example.contactsapp.objects.Navigator
 import com.example.contactsapp.viewModels.ContactsViewModel
 
 
@@ -50,7 +51,7 @@ class AddContactFragment : Fragment() {
 
         binding.saveBtn.setOnClickListener() {
             contactsViewModel.addContact(createContact())
-            navigateToFragment(R.id.action_addContactFragment_to_contactsFragment)
+            Navigator.navigateToFragment(this, R.id.action_addContactFragment_to_viewPagerFragment)
         }
 
     }
@@ -65,14 +66,6 @@ class AddContactFragment : Fragment() {
     private fun loadImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         openGalleryActivity.launch(intent)
-    }
-
-    /**
-     * Navigate from this fragment to another
-     * @param navigationAction action id to navigate
-     */
-    private fun navigateToFragment(navigationAction: Int) {
-        findNavController().navigate(navigationAction)
     }
 
     /**
